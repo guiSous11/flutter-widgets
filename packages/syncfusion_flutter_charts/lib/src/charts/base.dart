@@ -40,8 +40,7 @@ import 'utils/enum.dart';
 import 'utils/helper.dart';
 import 'utils/typedef.dart';
 
-class ChartAreaParentData
-    extends ContainerBoxParentData<ChartAreaUpdateMixin> {}
+class ChartAreaParentData extends ContainerBoxParentData<ChartAreaUpdateMixin> {}
 
 class ChartArea extends MultiChildRenderObjectWidget {
   const ChartArea({
@@ -67,8 +66,7 @@ class ChartArea extends MultiChildRenderObjectWidget {
 
   @override
   RenderChartArea createRenderObject(BuildContext context) {
-    return RenderChartArea(
-        gestureSettings: MediaQuery.of(context).gestureSettings)
+    return RenderChartArea(gestureSettings: MediaQuery.of(context).gestureSettings)
       ..legendKey = legendKey
       ..legendItems = legendItems
       ..onChartTouchInteractionDown = onChartTouchInteractionDown
@@ -189,10 +187,8 @@ mixin ChartAreaUpdateMixin on RenderBox {
 class RenderChartArea extends RenderBox
     with
         ContainerRenderObjectMixin<ChartAreaUpdateMixin, ChartAreaParentData>,
-        RenderBoxContainerDefaultsMixin<ChartAreaUpdateMixin,
-            ChartAreaParentData>
-    implements
-        MouseTrackerAnnotation {
+        RenderBoxContainerDefaultsMixin<ChartAreaUpdateMixin, ChartAreaParentData>
+    implements MouseTrackerAnnotation {
   RenderChartArea({
     DeviceGestureSettings? gestureSettings,
   }) {
@@ -360,8 +356,7 @@ class RenderChartArea extends RenderBox
   void performLayout() {
     RenderBox? child = firstChild;
     while (child != null) {
-      final ChartAreaParentData childParentData =
-          child.parentData! as ChartAreaParentData;
+      final ChartAreaParentData childParentData = child.parentData! as ChartAreaParentData;
       child.layout(constraints);
       child = childParentData.nextSibling;
     }
@@ -375,8 +370,7 @@ class RenderChartArea extends RenderBox
     if (size.contains(position)) {
       RenderBox? child = lastChild;
       while (child != null) {
-        final ChartAreaParentData childParentData =
-            child.parentData! as ChartAreaParentData;
+        final ChartAreaParentData childParentData = child.parentData! as ChartAreaParentData;
         final bool isChildHit = result.addWithPaintOffset(
           offset: childParentData.offset,
           position: position,
@@ -388,10 +382,7 @@ class RenderChartArea extends RenderBox
         child = childParentData.previousSibling;
       }
 
-      isHit = isHit ||
-          onChartTouchInteractionDown != null ||
-          onChartTouchInteractionMove != null ||
-          onChartTouchInteractionUp != null;
+      isHit = isHit || onChartTouchInteractionDown != null || onChartTouchInteractionMove != null || onChartTouchInteractionUp != null;
 
       if (isHit) {
         result.add(BoxHitTestEntry(this, position));
@@ -425,8 +416,7 @@ class RenderChartArea extends RenderBox
       }
       _handlePointerMove(event);
     } else if (event is PointerHoverEvent) {
-      if (defaultTargetPlatform != TargetPlatform.iOS &&
-          defaultTargetPlatform != TargetPlatform.android) {
+      if (defaultTargetPlatform != TargetPlatform.iOS && defaultTargetPlatform != TargetPlatform.android) {
         _handlePointerHover(event);
       }
     } else if (event is PointerUpEvent) {
@@ -470,8 +460,7 @@ class RenderChartArea extends RenderBox
 
   @protected
   void _handlePointerDown(PointerDownEvent details) {
-    onChartTouchInteractionDown?.call(ChartTouchInteractionArgs()
-      ..position = globalToLocal(details.position));
+    onChartTouchInteractionDown?.call(ChartTouchInteractionArgs()..position = globalToLocal(details.position));
     if (_isPlotAreaHit(details.position)) {
       _plotArea?.visitChildren((RenderObject child) {
         if (child is ChartSeriesRenderer) {
@@ -483,8 +472,7 @@ class RenderChartArea extends RenderBox
 
   @protected
   void _handlePointerMove(PointerMoveEvent details) {
-    onChartTouchInteractionMove?.call(ChartTouchInteractionArgs()
-      ..position = globalToLocal(details.position));
+    onChartTouchInteractionMove?.call(ChartTouchInteractionArgs()..position = globalToLocal(details.position));
   }
 
   @protected
@@ -500,8 +488,7 @@ class RenderChartArea extends RenderBox
       _plotArea!.isTooltipActivated = false;
       RenderBox? child = _plotArea?.lastChild;
       while (child != null) {
-        final StackParentData childParentData =
-            child.parentData! as StackParentData;
+        final StackParentData childParentData = child.parentData! as StackParentData;
         if (child is ChartSeriesRenderer) {
           child.handlePointerHover(details);
         }
@@ -512,8 +499,7 @@ class RenderChartArea extends RenderBox
 
   @protected
   void _handlePointerUp(PointerUpEvent details) {
-    onChartTouchInteractionUp?.call(ChartTouchInteractionArgs()
-      ..position = globalToLocal(details.position));
+    onChartTouchInteractionUp?.call(ChartTouchInteractionArgs()..position = globalToLocal(details.position));
     if (_isPlotAreaHit(details.position)) {
       _plotArea?.visitChildren((RenderObject child) {
         if (child is ChartSeriesRenderer) {
@@ -536,8 +522,7 @@ class RenderChartArea extends RenderBox
       _plotArea!.isTooltipActivated = false;
       RenderBox? child = _plotArea?.lastChild;
       while (child != null) {
-        final StackParentData childParentData =
-            child.parentData! as StackParentData;
+        final StackParentData childParentData = child.parentData! as StackParentData;
         if (child is ChartSeriesRenderer) {
           child.handleLongPressStart(details);
         }
@@ -583,8 +568,7 @@ class RenderChartArea extends RenderBox
       _plotArea!.isTooltipActivated = false;
       RenderBox? child = _plotArea?.lastChild;
       while (child != null) {
-        final StackParentData childParentData =
-            child.parentData! as StackParentData;
+        final StackParentData childParentData = child.parentData! as StackParentData;
         if (child is ChartSeriesRenderer) {
           child.handleTapUp(details);
         }
@@ -609,8 +593,7 @@ class RenderChartArea extends RenderBox
       _plotArea!.isTooltipActivated = false;
       RenderBox? child = _plotArea?.lastChild;
       while (child != null) {
-        final StackParentData childParentData =
-            child.parentData! as StackParentData;
+        final StackParentData childParentData = child.parentData! as StackParentData;
         if (child is ChartSeriesRenderer) {
           child.handleDoubleTap(_doubleTapPosition!);
         }
@@ -741,8 +724,7 @@ class CartesianChartArea extends ChartArea {
 
   @override
   RenderCartesianChartArea createRenderObject(BuildContext context) {
-    return RenderCartesianChartArea(
-        gestureSettings: MediaQuery.of(context).gestureSettings)
+    return RenderCartesianChartArea(gestureSettings: MediaQuery.of(context).gestureSettings)
       ..legendKey = legendKey
       ..legendItems = legendItems
       ..plotAreaBackgroundImage = plotAreaBackgroundImage
@@ -753,8 +735,7 @@ class CartesianChartArea extends ChartArea {
   }
 
   @override
-  void updateRenderObject(
-      BuildContext context, RenderCartesianChartArea renderObject) {
+  void updateRenderObject(BuildContext context, RenderCartesianChartArea renderObject) {
     super.updateRenderObject(context, renderObject);
     renderObject.plotAreaBackgroundImage = plotAreaBackgroundImage;
     renderObject.plotAreaBackgroundColor = plotAreaBackgroundColor;
@@ -884,11 +865,9 @@ class RenderCartesianChartArea extends RenderChartArea {
     assert(_plotArea != null);
     if (_plotArea != null) {
       final Offset plotAreaOffset = _cartesianAxes!.plotAreaOffset;
-      final BoxConstraints plotAreaConstraints =
-          _cartesianAxes!._plotAreaConstraints!;
+      final BoxConstraints plotAreaConstraints = _cartesianAxes!._plotAreaConstraints!;
 
-      ChartAreaParentData childParentData =
-          _plotArea!.parentData! as ChartAreaParentData;
+      ChartAreaParentData childParentData = _plotArea!.parentData! as ChartAreaParentData;
       childParentData.offset = plotAreaOffset;
       _plotArea!.layout(plotAreaConstraints, parentUsesSize: true);
 
@@ -899,8 +878,7 @@ class RenderCartesianChartArea extends RenderChartArea {
       }
 
       if (_indicatorArea != null) {
-        final ChartAreaParentData indicatorParentData =
-            _indicatorArea!.parentData! as ChartAreaParentData;
+        final ChartAreaParentData indicatorParentData = _indicatorArea!.parentData! as ChartAreaParentData;
         indicatorParentData.offset = _cartesianAxes!.plotAreaOffset;
         _indicatorArea!.layout(_cartesianAxes!._plotAreaConstraints!);
       }
@@ -931,8 +909,7 @@ class RenderCartesianChartArea extends RenderChartArea {
     // The plot area image and background should be drawn in the chart area,
     // as it is meant to be positioned below the axis grid lines.
     if (_plotArea != null) {
-      final Offset paintOffset =
-          (_plotArea!.parentData! as BoxParentData).offset;
+      final Offset paintOffset = (_plotArea!.parentData! as BoxParentData).offset;
       final Rect rect = (offset + paintOffset) & _plotArea!.size;
       if (_plotAreaImage != null) {
         paintImage(
@@ -955,8 +932,7 @@ class RenderCartesianChartArea extends RenderChartArea {
 
     if (_cartesianAxes != null) {
       _cartesianAxes!._isGridLinePaint = true;
-      context.paintChild(_cartesianAxes!,
-          (_cartesianAxes!.parentData! as BoxParentData).offset + offset);
+      context.paintChild(_cartesianAxes!, (_cartesianAxes!.parentData! as BoxParentData).offset + offset);
     }
 
     defaultPaint(context, offset);
@@ -1048,8 +1024,7 @@ class ChartPlotArea extends MultiChildRenderObjectWidget {
   }
 
   @override
-  void updateRenderObject(
-      BuildContext context, RenderChartPlotArea renderObject) {
+  void updateRenderObject(BuildContext context, RenderChartPlotArea renderObject) {
     super.updateRenderObject(context, renderObject);
     renderObject
       ..backgroundColor = backgroundColor
@@ -1092,8 +1067,7 @@ class RenderChartPlotArea extends RenderStack with ChartAreaUpdateMixin {
   DataLabelTapCallback? onDataLabelTapped;
   ChartSelectionCallback? onSelectionChanged;
 
-  late final SelectionController selectionController =
-      SelectionController(this);
+  late final SelectionController selectionController = SelectionController(this);
   RenderBehaviorArea? behaviorArea;
   SfLocalizations? localizations;
 
@@ -1255,8 +1229,7 @@ class RenderChartPlotArea extends RenderStack with ChartAreaUpdateMixin {
     bool isHit = false;
     RenderBox? child = lastChild;
     while (child != null) {
-      final StackParentData childParentData =
-          child.parentData! as StackParentData;
+      final StackParentData childParentData = child.parentData! as StackParentData;
       final bool isChildHit = result.addWithPaintOffset(
         offset: childParentData.offset,
         position: position,
@@ -1273,8 +1246,7 @@ class RenderChartPlotArea extends RenderStack with ChartAreaUpdateMixin {
 
   @override
   void paint(PaintingContext context, Offset offset) {
-    final Rect bounds =
-        Rect.fromLTWH(offset.dx, offset.dy, size.width, size.height);
+    final Rect bounds = Rect.fromLTWH(offset.dx, offset.dy, size.width, size.height);
     if (backgroundColor != null) {
       context.canvas.drawRect(
         bounds,
@@ -1284,9 +1256,7 @@ class RenderChartPlotArea extends RenderStack with ChartAreaUpdateMixin {
       );
     }
 
-    if (_borderColor != null &&
-        _borderColor != Colors.transparent &&
-        _borderWidth > 0) {
+    if (_borderColor != null && _borderColor != Colors.transparent && _borderWidth > 0) {
       context.canvas.drawRect(
         bounds,
         Paint()
@@ -1370,8 +1340,7 @@ class CartesianChartPlotArea extends ChartPlotArea {
   }
 
   @override
-  void updateRenderObject(
-      BuildContext context, RenderCartesianChartPlotArea renderObject) {
+  void updateRenderObject(BuildContext context, RenderCartesianChartPlotArea renderObject) {
     super.updateRenderObject(context, renderObject);
     renderObject
       ..isTransposed = isTransposed
@@ -1476,9 +1445,7 @@ class RenderCartesianChartPlotArea extends RenderChartPlotArea {
       }
 
       final AxisDependent? series = child as AxisDependent?;
-      if (series == null ||
-          series.xAxis == null ||
-          !(series as CartesianSeriesRenderer).controller.isVisible) {
+      if (series == null || series.xAxis == null || !(series as CartesianSeriesRenderer).controller.isVisible) {
         return;
       }
 
@@ -1486,8 +1453,7 @@ class RenderCartesianChartPlotArea extends RenderChartPlotArea {
       for (final AxisDependent xDependent in series.xAxis!.dependents) {
         final bool isSeries = xDependent is CartesianSeriesRenderer;
         if ((isSeries && !xDependent.controller.isVisible) ||
-            xDependent is ClusterSeriesMixin &&
-                (xDependent as ClusterSeriesMixin)._clusterIndex != -1) {
+            xDependent is ClusterSeriesMixin && (xDependent as ClusterSeriesMixin)._clusterIndex != -1) {
           continue;
         }
 
@@ -1497,35 +1463,27 @@ class RenderCartesianChartPlotArea extends RenderChartPlotArea {
           }
 
           for (final AxisDependent yDependent in xDependent.yAxis!.dependents) {
-            if (yDependent is! CartesianSeriesRenderer ||
-                !yDependent.controller.isVisible) {
+            if (yDependent is! CartesianSeriesRenderer || !yDependent.controller.isVisible) {
               continue;
             }
             if (xDependent.xAxis!.dependents.contains(yDependent)) {
               if (yDependent is StackingSeriesMixin) {
-                final StackingSeriesMixin stacked =
-                    yDependent as StackingSeriesMixin;
+                final StackingSeriesMixin stacked = yDependent as StackingSeriesMixin;
                 final String groupName = stacked.groupName;
-                final int size = sbsDetails!.isNotEmpty &&
-                        groupingKeys.isNotEmpty &&
-                        groupingKeys.containsKey(groupName)
+                final int size = sbsDetails!.isNotEmpty && groupingKeys.isNotEmpty && groupingKeys.containsKey(groupName)
                     ? sbsDetails![groupingKeys[groupName]]!.length
                     : 0;
                 bool isSameType = false;
                 StackingSeriesMixin? previous;
                 if (size > 0) {
-                  previous = sbsDetails![groupingKeys[groupName]]![size - 1]
-                      as StackingSeriesMixin?;
-                  isSameType = previous != null &&
-                      previous.yAxis!.dependents.contains(yDependent) &&
-                      previous.runtimeType == yDependent.runtimeType;
+                  previous = sbsDetails![groupingKeys[groupName]]![size - 1] as StackingSeriesMixin?;
+                  isSameType = previous != null && previous.yAxis!.dependents.contains(yDependent) && previous.runtimeType == yDependent.runtimeType;
                 }
 
                 if (groupingKeys.containsKey(groupName) && isSameType) {
                   sbsDetails![groupingKeys[groupName]]!.add(yDependent);
                   if (stacked is ClusterSeriesMixin) {
-                    (stacked as ClusterSeriesMixin)._clusterIndex =
-                        groupingKeys[groupName]!;
+                    (stacked as ClusterSeriesMixin)._clusterIndex = groupingKeys[groupName]!;
                   }
                 } else {
                   groupingKeys.update(
@@ -1638,8 +1596,7 @@ class RenderCartesianChartPlotArea extends RenderChartPlotArea {
 
           final double width = sbs.width;
           if (!enableSideBySideSeriesPlacement) {
-            final double range =
-                (width * _primaryAxisAdjacentDataPointsMinDiff) / 2;
+            final double range = (width * _primaryAxisAdjacentDataPointsMinDiff) / 2;
             sbs.sbsInfo = DoubleRange(-range, range);
             continue;
           }
@@ -1648,19 +1605,15 @@ class RenderCartesianChartPlotArea extends RenderChartPlotArea {
             sbs.sbsInfo = DoubleRange(0, 1);
           }
 
-          final int seriesCount =
-              sbs.xAxis != null ? sbs.xAxis!.sbsSeriesCount : 0;
+          final int seriesCount = sbs.xAxis != null ? sbs.xAxis!.sbsSeriesCount : 0;
           if ((sbs as ClusterSeriesMixin)._clusterIndex == 0) {
-            startPosition =
-                -_primaryAxisAdjacentDataPointsMinDiff * (totalWidth / 2);
+            startPosition = -_primaryAxisAdjacentDataPointsMinDiff * (totalWidth / 2);
           }
 
           final double space = (sbsMaxWidth - width) / seriesCount;
-          double start = startPosition +
-              ((space * _primaryAxisAdjacentDataPointsMinDiff) / 2);
+          double start = startPosition + ((space * _primaryAxisAdjacentDataPointsMinDiff) / 2);
 
-          end = start +
-              ((width / seriesCount) * _primaryAxisAdjacentDataPointsMinDiff);
+          end = start + ((width / seriesCount) * _primaryAxisAdjacentDataPointsMinDiff);
           final double delta = end - start;
           final double spacing = sbs.spacing * delta;
 
@@ -1714,8 +1667,7 @@ class RenderCartesianChartPlotArea extends RenderChartPlotArea {
   void performLayout() {
     super.performLayout();
     if (_cartesianAxes != null && parentData != null) {
-      _cartesianAxes!.plotAreaBounds =
-          (parentData! as BoxParentData).offset & size;
+      _cartesianAxes!.plotAreaBounds = (parentData! as BoxParentData).offset & size;
     }
 
     // Once all cartesian series layouts are completed, use this method to
@@ -1724,8 +1676,7 @@ class RenderCartesianChartPlotArea extends RenderChartPlotArea {
       if (child is CartesianSeriesRenderer &&
           child.controller.isVisible &&
           child.dataLabelSettings.isVisible &&
-          child.dataLabelSettings.labelIntersectAction !=
-              LabelIntersectAction.none &&
+          child.dataLabelSettings.labelIntersectAction != LabelIntersectAction.none &&
           child.dataLabelContainer != null) {
         child.dataLabelContainer!.handleMultiSeriesDataLabelCollisions();
       }
@@ -1766,8 +1717,7 @@ class RenderCartesianChartPlotArea extends RenderChartPlotArea {
       render = SeriesRender.dataLabel;
       RenderBox? child = firstChild;
       while (child != null) {
-        final StackParentData childParentData =
-            child.parentData! as StackParentData;
+        final StackParentData childParentData = child.parentData! as StackParentData;
         context.paintChild(child, childParentData.offset + offset);
         child = childParentData.nextSibling;
       }
@@ -1777,8 +1727,7 @@ class RenderCartesianChartPlotArea extends RenderChartPlotArea {
       render = SeriesRender.trendline;
       RenderBox? child = firstChild;
       while (child != null) {
-        final StackParentData childParentData =
-            child.parentData! as StackParentData;
+        final StackParentData childParentData = child.parentData! as StackParentData;
         context.paintChild(child, childParentData.offset + offset);
         child = childParentData.nextSibling;
       }
@@ -1830,8 +1779,7 @@ class CartesianAxes extends MultiChildRenderObjectWidget {
   }
 
   @override
-  void updateRenderObject(
-      BuildContext context, RenderCartesianAxes renderObject) {
+  void updateRenderObject(BuildContext context, RenderCartesianAxes renderObject) {
     super.updateRenderObject(context, renderObject);
     renderObject
       ..vsync = vsync
@@ -1847,8 +1795,7 @@ class CartesianAxes extends MultiChildRenderObjectWidget {
 class RenderCartesianAxes extends RenderBox
     with
         ContainerRenderObjectMixin<RenderChartAxis, CartesianAxesParentData>,
-        RenderBoxContainerDefaultsMixin<RenderChartAxis,
-            CartesianAxesParentData>,
+        RenderBoxContainerDefaultsMixin<RenderChartAxis, CartesianAxesParentData>,
         ChartAreaUpdateMixin {
   RenderCartesianAxes({
     required TickerProvider vsync,
@@ -1940,15 +1887,13 @@ class RenderCartesianAxes extends RenderBox
       return;
     }
 
-    final CartesianAxesParentData firstChildParentData =
-        firstChild!.parentData! as CartesianAxesParentData;
+    final CartesianAxesParentData firstChildParentData = firstChild!.parentData! as CartesianAxesParentData;
     final String primaryXAxisName = firstChild!.name ?? primaryXAxisDefaultName;
     firstChild!.name = primaryXAxisName;
 
     assert(firstChildParentData.nextSibling != null);
     final RenderChartAxis primaryYAxis = firstChildParentData.nextSibling!;
-    final String primaryYAxisName =
-        primaryYAxis.name ?? primaryYAxisDefaultName;
+    final String primaryYAxisName = primaryYAxis.name ?? primaryYAxisDefaultName;
     primaryYAxis.name = primaryYAxisName;
 
     visitChildren((RenderObject child) {
@@ -1958,8 +1903,7 @@ class RenderCartesianAxes extends RenderBox
       }
     });
 
-    final RenderCartesianChartArea? chartArea =
-        parent as RenderCartesianChartArea?;
+    final RenderCartesianChartArea? chartArea = parent as RenderCartesianChartArea?;
     assert(chartArea != null);
     if (chartArea != null) {
       assert(chartArea._plotArea != null);
@@ -1967,8 +1911,7 @@ class RenderCartesianAxes extends RenderBox
         chartArea._plotArea!.visitChildren((RenderObject child) {
           final AxisDependent? axisDependent = child as AxisDependent?;
           if (axisDependent != null) {
-            RenderChartAxis? axis =
-                axes[axisDependent.xAxisName ?? primaryXAxisName];
+            RenderChartAxis? axis = axes[axisDependent.xAxisName ?? primaryXAxisName];
             axisDependent.xAxis = axis;
 
             axis = axes[axisDependent.yAxisName ?? primaryYAxisName];
@@ -2038,8 +1981,7 @@ class RenderCartesianAxes extends RenderBox
     bool isHit = false;
     RenderBox? child = lastChild;
     while (child != null) {
-      final CartesianAxesParentData childParentData =
-          child.parentData! as CartesianAxesParentData;
+      final CartesianAxesParentData childParentData = child.parentData! as CartesianAxesParentData;
       final bool isChildHit = result.addWithPaintOffset(
         offset: childParentData.offset,
         position: position,
@@ -2146,21 +2088,18 @@ class RenderCartesianAxes extends RenderBox
     performPostLayout();
   }
 
-  void _arrangeVerticalAxes(
-      Rect plotAreaBounds, List<RenderChartAxis> verticalAxes) {
+  void _arrangeVerticalAxes(Rect plotAreaBounds, List<RenderChartAxis> verticalAxes) {
     Offset leftAxisPosition = plotAreaBounds.topLeft;
     Offset rightAxisPosition = plotAreaBounds.topRight;
     for (final RenderChartAxis axis in verticalAxes) {
       final double? crossing = _crossValue(axis);
-      final CartesianAxesParentData childParentData =
-          axis.parentData! as CartesianAxesParentData;
+      final CartesianAxesParentData childParentData = axis.parentData! as CartesianAxesParentData;
       if (axis.opposedPosition) {
         axis.invertElementsOrder = false;
         if (crossing != null) {
           if (crossing + axis.size.width > plotAreaBounds.right) {
             axis.invertElementsOrder = true;
-            childParentData.offset =
-                Offset(crossing - axis.size.width, plotAreaBounds.top);
+            childParentData.offset = Offset(crossing - axis.size.width, plotAreaBounds.top);
           } else {
             childParentData.offset = Offset(crossing, plotAreaBounds.top);
           }
@@ -2179,22 +2118,19 @@ class RenderCartesianAxes extends RenderBox
             childParentData.offset = Offset(y, plotAreaBounds.top);
           }
         } else {
-          childParentData.offset =
-              leftAxisPosition.translate(-axis.size.width, 0);
+          childParentData.offset = leftAxisPosition.translate(-axis.size.width, 0);
           leftAxisPosition = childParentData.offset;
         }
       }
     }
   }
 
-  void _arrangeHorizontalAxes(
-      Rect plotAreaBounds, List<RenderChartAxis> horizontalAxes) {
+  void _arrangeHorizontalAxes(Rect plotAreaBounds, List<RenderChartAxis> horizontalAxes) {
     Offset topAxisPosition = plotAreaBounds.topLeft;
     Offset bottomAxisPosition = plotAreaBounds.bottomLeft;
     for (final RenderChartAxis axis in horizontalAxes) {
       final double? crossing = _crossValue(axis);
-      final CartesianAxesParentData childParentData =
-          axis.parentData! as CartesianAxesParentData;
+      final CartesianAxesParentData childParentData = axis.parentData! as CartesianAxesParentData;
       if (axis.opposedPosition) {
         axis.invertElementsOrder = true;
         if (crossing != null) {
@@ -2206,8 +2142,7 @@ class RenderCartesianAxes extends RenderBox
             childParentData.offset = Offset(plotAreaBounds.left, y);
           }
         } else {
-          childParentData.offset =
-              topAxisPosition.translate(0, -axis.size.height);
+          childParentData.offset = topAxisPosition.translate(0, -axis.size.height);
           topAxisPosition = childParentData.offset;
         }
       } else {
@@ -2215,26 +2150,21 @@ class RenderCartesianAxes extends RenderBox
         if (crossing != null) {
           if (crossing + axis.size.height > plotAreaBounds.bottom) {
             axis.invertElementsOrder = true;
-            childParentData.offset =
-                Offset(plotAreaBounds.left, crossing - axis.size.height);
+            childParentData.offset = Offset(plotAreaBounds.left, crossing - axis.size.height);
           } else {
             childParentData.offset = Offset(plotAreaBounds.left, crossing);
           }
         } else {
           childParentData.offset = bottomAxisPosition;
-          bottomAxisPosition =
-              bottomAxisPosition.translate(0, axis.size.height);
+          bottomAxisPosition = bottomAxisPosition.translate(0, axis.size.height);
         }
       }
     }
   }
 
   double? _crossValue(RenderChartAxis axis) {
-    if (axis.placeLabelsNearAxisLine &&
-        axis.crossesAt != null &&
-        axis.associatedAxis != null) {
-      return axis.associatedAxis!
-          .pointToPixel(axis.associatedAxis!.actualValue(axis.crossesAt));
+    if (axis.placeLabelsNearAxisLine && axis.crossesAt != null && axis.associatedAxis != null) {
+      return axis.associatedAxis!.pointToPixel(axis.associatedAxis!.actualValue(axis.crossesAt));
     }
 
     return null;
@@ -2243,9 +2173,7 @@ class RenderCartesianAxes extends RenderBox
   RenderChartAxis? _associatedAxis(RenderChartAxis axis) {
     if (axis.associatedAxisName != null) {
       final RenderChartAxis? associatedAxis = axes[axis.associatedAxisName];
-      if (associatedAxis != null &&
-          ((associatedAxis.isVertical && axis.isVertical) ||
-              (!associatedAxis.isVertical && !axis.isVertical))) {
+      if (associatedAxis != null && ((associatedAxis.isVertical && axis.isVertical) || (!associatedAxis.isVertical && !axis.isVertical))) {
         return axis.isXAxis ? _yAxes.first : _xAxes.first;
       } else {
         return associatedAxis;
@@ -2259,8 +2187,7 @@ class RenderCartesianAxes extends RenderBox
     RenderChartAxis? child = firstChild;
     while (child != null) {
       child.renderType = AxisRender.gridLines;
-      context.paintChild(
-          child, (child.parentData! as BoxParentData).offset + offset);
+      context.paintChild(child, (child.parentData! as BoxParentData).offset + offset);
       child = childAfter(child);
     }
 
@@ -2278,14 +2205,11 @@ class RenderCartesianAxes extends RenderBox
     _isGridLinePaint = false;
   }
 
-  void _paintPlotBands(PaintingContext context, Offset offset,
-      {bool onSeries = false}) {
+  void _paintPlotBands(PaintingContext context, Offset offset, {bool onSeries = false}) {
     RenderChartAxis? child = firstChild;
     while (child != null) {
-      child.renderType =
-          onSeries ? AxisRender.overPlotBand : AxisRender.underPlotBand;
-      context.paintChild(
-          child, (child.parentData! as BoxParentData).offset + offset);
+      child.renderType = onSeries ? AxisRender.overPlotBand : AxisRender.underPlotBand;
+      context.paintChild(child, (child.parentData! as BoxParentData).offset + offset);
       child = childAfter(child);
     }
   }
@@ -2356,8 +2280,7 @@ class CircularChartPlotArea extends ChartPlotArea {
   }
 
   @override
-  void updateRenderObject(
-      BuildContext context, RenderCircularChartPlotArea renderObject) {
+  void updateRenderObject(BuildContext context, RenderCircularChartPlotArea renderObject) {
     super.updateRenderObject(context, renderObject);
     renderObject
       ..centerX = centerX
@@ -2604,8 +2527,7 @@ class IndicatorArea extends MultiChildRenderObjectWidget {
   }
 
   @override
-  void updateRenderObject(
-      BuildContext context, RenderIndicatorArea renderObject) {
+  void updateRenderObject(BuildContext context, RenderIndicatorArea renderObject) {
     super.updateRenderObject(context, renderObject);
     renderObject
       ..indicators = indicators
@@ -2635,8 +2557,7 @@ class RenderIndicatorArea extends RenderBox
   @override
   void performUpdate() {
     if (indicators.isNotEmpty) {
-      final RenderCartesianChartArea? chartArea =
-          parent as RenderCartesianChartArea?;
+      final RenderCartesianChartArea? chartArea = parent as RenderCartesianChartArea?;
       if (chartArea != null) {
         chartArea._plotArea!.visitChildren((RenderObject child) {
           if (child is CartesianSeriesRenderer) {
@@ -2702,8 +2623,7 @@ class AnnotationArea extends MultiChildRenderObjectWidget {
   }
 
   @override
-  void updateRenderObject(
-      BuildContext context, RenderAnnotationArea renderObject) {
+  void updateRenderObject(BuildContext context, RenderAnnotationArea renderObject) {
     super.updateRenderObject(context, renderObject);
     renderObject
       ..annotations = annotations
@@ -2772,8 +2692,7 @@ class RenderAnnotationArea extends RenderStack with ChartAreaUpdateMixin {
     RenderBox? child = firstChild;
     int index = 0;
     while (child != null) {
-      final AnnotationParentData? childParentData =
-          child.parentData as AnnotationParentData?;
+      final AnnotationParentData? childParentData = child.parentData as AnnotationParentData?;
       final CartesianChartAnnotation annotation = _annotations![index];
       late Offset offset;
       switch (annotation.coordinateUnit) {
@@ -2792,14 +2711,11 @@ class RenderAnnotationArea extends RenderStack with ChartAreaUpdateMixin {
 
       child.layout(constraints, parentUsesSize: true);
       final Size childSize = child.size;
-      final double x = _horizontalAlignment(
-          annotation.horizontalAlignment, offset.dx, childSize);
-      final double y = _verticalAlignment(
-          annotation.verticalAlignment, offset.dy, childSize);
+      final double x = _horizontalAlignment(annotation.horizontalAlignment, offset.dx, childSize);
+      final double y = _verticalAlignment(annotation.verticalAlignment, offset.dy, childSize);
       if (childParentData != null) {
         childParentData.offset = Offset(x, y);
-        childParentData.isVisible = _isVisible(
-            annotation, _isBeyondRegion(annotation, x, y, childSize));
+        childParentData.isVisible = _isVisible(annotation, _isBeyondRegion(annotation, x, y, childSize));
         child = childParentData.nextSibling;
       }
 
@@ -2811,10 +2727,8 @@ class RenderAnnotationArea extends RenderStack with ChartAreaUpdateMixin {
     final RenderChartAxis? xAxis = _xAxis(annotation);
     final RenderChartAxis? yAxis = _yAxis(annotation);
     if (xAxis != null && yAxis != null) {
-      final Offset position = rawValueToPixelPoint(
-          annotation.x, annotation.y, xAxis, yAxis, isTransposed);
-      return Offset(
-          position.dx + _plotAreaOffset.dx, position.dy + _plotAreaOffset.dy);
+      final Offset position = rawValueToPixelPoint(annotation.x, annotation.y, xAxis, yAxis, isTransposed);
+      return Offset(position.dx + _plotAreaOffset.dx, position.dy + _plotAreaOffset.dy);
     }
     return Offset.zero;
   }
@@ -2847,24 +2761,16 @@ class RenderAnnotationArea extends RenderStack with ChartAreaUpdateMixin {
       height = size.height;
     }
 
-    return Offset(width * xFactor, height * yFactor) +
-        (annotation.region == AnnotationRegion.plotArea
-            ? _plotAreaOffset
-            : Offset.zero);
+    return Offset(width * xFactor, height * yFactor) + (annotation.region == AnnotationRegion.plotArea ? _plotAreaOffset : Offset.zero);
   }
 
   RenderChartAxis? _xAxis(CartesianChartAnnotation annotation) {
     RenderChartAxis? xAxis;
-    final RenderCartesianChartArea? chartArea =
-        parent as RenderCartesianChartArea?;
+    final RenderCartesianChartArea? chartArea = parent as RenderCartesianChartArea?;
     if (chartArea != null) {
-      final Map<String?, RenderChartAxis>? axes =
-          chartArea._cartesianAxes?.axes;
+      final Map<String?, RenderChartAxis>? axes = chartArea._cartesianAxes?.axes;
       final List<RenderChartAxis>? xAxes = chartArea._cartesianAxes?._xAxes;
-      if (axes != null &&
-          axes.isNotEmpty &&
-          xAxes != null &&
-          xAxes.isNotEmpty) {
+      if (axes != null && axes.isNotEmpty && xAxes != null && xAxes.isNotEmpty) {
         if (annotation.xAxisName != null) {
           xAxis = axes[annotation.xAxisName];
         }
@@ -2877,16 +2783,11 @@ class RenderAnnotationArea extends RenderStack with ChartAreaUpdateMixin {
 
   RenderChartAxis? _yAxis(CartesianChartAnnotation annotation) {
     RenderChartAxis? yAxis;
-    final RenderCartesianChartArea? chartArea =
-        parent as RenderCartesianChartArea?;
+    final RenderCartesianChartArea? chartArea = parent as RenderCartesianChartArea?;
     if (chartArea != null) {
-      final Map<String?, RenderChartAxis>? axes =
-          chartArea._cartesianAxes?.axes;
+      final Map<String?, RenderChartAxis>? axes = chartArea._cartesianAxes?.axes;
       final List<RenderChartAxis>? yAxes = chartArea._cartesianAxes?._yAxes;
-      if (axes != null &&
-          axes.isNotEmpty &&
-          yAxes != null &&
-          yAxes.isNotEmpty) {
+      if (axes != null && axes.isNotEmpty && yAxes != null && yAxes.isNotEmpty) {
         if (annotation.yAxisName != null) {
           yAxis = axes[annotation.yAxisName];
         }
@@ -2897,8 +2798,7 @@ class RenderAnnotationArea extends RenderStack with ChartAreaUpdateMixin {
     return yAxis;
   }
 
-  double _horizontalAlignment(
-      ChartAlignment horizontalAlignment, double xPosition, Size childSize) {
+  double _horizontalAlignment(ChartAlignment horizontalAlignment, double xPosition, Size childSize) {
     final double size = childSize.width;
     switch (horizontalAlignment) {
       case ChartAlignment.near:
@@ -2910,8 +2810,7 @@ class RenderAnnotationArea extends RenderStack with ChartAreaUpdateMixin {
     }
   }
 
-  double _verticalAlignment(
-      ChartAlignment verticalAlignment, double yPosition, Size childSize) {
+  double _verticalAlignment(ChartAlignment verticalAlignment, double yPosition, Size childSize) {
     final double size = childSize.height;
     switch (verticalAlignment) {
       case ChartAlignment.near:
@@ -2923,8 +2822,7 @@ class RenderAnnotationArea extends RenderStack with ChartAreaUpdateMixin {
     }
   }
 
-  bool _isBeyondRegion(
-      CartesianChartAnnotation annotation, double x, double y, Size size) {
+  bool _isBeyondRegion(CartesianChartAnnotation annotation, double x, double y, Size size) {
     final Rect childBounds = Rect.fromLTWH(x, y, size.width, size.height);
     switch (annotation.region) {
       case AnnotationRegion.chart:
@@ -2936,10 +2834,7 @@ class RenderAnnotationArea extends RenderStack with ChartAreaUpdateMixin {
   }
 
   bool _isBeyond(Rect current, Rect source) {
-    return current.left < source.left ||
-        current.right > source.right ||
-        current.top < source.top ||
-        current.bottom > source.bottom;
+    return current.left < source.left || current.right > source.right || current.top < source.top || current.bottom > source.bottom;
   }
 
   bool _isVisible(CartesianChartAnnotation annotation, bool isBeyondRegion) {
@@ -2957,13 +2852,10 @@ class RenderAnnotationArea extends RenderStack with ChartAreaUpdateMixin {
       context.canvas.save();
       final CartesianChartAnnotation annotation = _annotations![index];
       if (annotation.clip == ChartClipBehavior.clip) {
-        context.canvas.clipRect(annotation.region == AnnotationRegion.chart
-            ? paintBounds
-            : _plotAreaBounds);
+        context.canvas.clipRect(annotation.region == AnnotationRegion.chart ? paintBounds : _plotAreaBounds);
       }
 
-      final AnnotationParentData childParentData =
-          child.parentData! as AnnotationParentData;
+      final AnnotationParentData childParentData = child.parentData! as AnnotationParentData;
       if (childParentData.isVisible) {
         context.paintChild(child, childParentData.offset + offset);
       }
@@ -2990,15 +2882,13 @@ class CircularAnnotationArea extends MultiChildRenderObjectWidget {
   }
 
   @override
-  void updateRenderObject(
-      BuildContext context, RenderCircularAnnotationArea renderObject) {
+  void updateRenderObject(BuildContext context, RenderCircularAnnotationArea renderObject) {
     super.updateRenderObject(context, renderObject);
     renderObject.annotations = annotations;
   }
 }
 
-class RenderCircularAnnotationArea extends RenderStack
-    with ChartAreaUpdateMixin {
+class RenderCircularAnnotationArea extends RenderStack with ChartAreaUpdateMixin {
   List<CircularChartAnnotation>? get annotations => _annotations;
   List<CircularChartAnnotation>? _annotations;
   set annotations(List<CircularChartAnnotation>? value) {
@@ -3022,34 +2912,25 @@ class RenderCircularAnnotationArea extends RenderStack
     RenderBox? child = firstChild;
     int index = 0;
     while (child != null) {
-      final AnnotationParentData? childParentData =
-          child.parentData as AnnotationParentData?;
+      final AnnotationParentData? childParentData = child.parentData as AnnotationParentData?;
       final CircularChartAnnotation annotation = _annotations![index];
 
       final double radius = percentToValue(annotation.radius, minSize)!;
-      final Offset angle = calculateOffset(annotation.angle.toDouble(), radius,
-          Offset(size.width / 2, size.height / 2));
+      final Offset angle = calculateOffset(annotation.angle.toDouble(), radius, Offset(size.width / 2, size.height / 2));
       final Offset offset = Offset(angle.dx, angle.dy);
       final double width = percentToValue(annotations![index].width, minSize)!;
-      final double height =
-          percentToValue(annotations![index].height, minSize)!;
+      final double height = percentToValue(annotations![index].height, minSize)!;
 
       if (height > 0 && width > 0) {
-        final BoxConstraints childConstraints = BoxConstraints(
-            minHeight: height,
-            minWidth: width,
-            maxHeight: height,
-            maxWidth: width);
+        final BoxConstraints childConstraints = BoxConstraints(minHeight: height, minWidth: width, maxHeight: height, maxWidth: width);
         child.layout(childConstraints, parentUsesSize: true);
       } else {
         child.layout(constraints, parentUsesSize: true);
       }
 
       final Size childSize = child.size;
-      final double x = _horizontalAlignment(
-          annotation.horizontalAlignment, offset.dx, childSize);
-      final double y = _verticalAlignment(
-          annotation.verticalAlignment, offset.dy, childSize);
+      final double x = _horizontalAlignment(annotation.horizontalAlignment, offset.dx, childSize);
+      final double y = _verticalAlignment(annotation.verticalAlignment, offset.dy, childSize);
       if (childParentData != null) {
         childParentData.offset = Offset(x, y);
         child = childParentData.nextSibling;
@@ -3058,8 +2939,7 @@ class RenderCircularAnnotationArea extends RenderStack
     }
   }
 
-  double _horizontalAlignment(
-      ChartAlignment horizontalAlignment, double xPosition, Size childSize) {
+  double _horizontalAlignment(ChartAlignment horizontalAlignment, double xPosition, Size childSize) {
     final double size = childSize.width;
     switch (horizontalAlignment) {
       case ChartAlignment.near:
@@ -3071,8 +2951,7 @@ class RenderCircularAnnotationArea extends RenderStack
     }
   }
 
-  double _verticalAlignment(
-      ChartAlignment verticalAlignment, double yPosition, Size childSize) {
+  double _verticalAlignment(ChartAlignment verticalAlignment, double yPosition, Size childSize) {
     final double size = childSize.height;
     switch (verticalAlignment) {
       case ChartAlignment.near:
@@ -3088,8 +2967,7 @@ class RenderCircularAnnotationArea extends RenderStack
   void paint(PaintingContext context, Offset offset) {
     RenderBox? child = firstChild;
     while (child != null) {
-      final AnnotationParentData childParentData =
-          child.parentData! as AnnotationParentData;
+      final AnnotationParentData childParentData = child.parentData! as AnnotationParentData;
       context.paintChild(child, childParentData.offset + offset);
       child = childParentData.nextSibling;
     }
@@ -3118,8 +2996,7 @@ class LoadingIndicator extends ConstrainedLayoutBuilder<BoxConstraints> {
   }
 
   @override
-  void updateRenderObject(
-      BuildContext context, RenderLoadingIndicator renderObject) {
+  void updateRenderObject(BuildContext context, RenderLoadingIndicator renderObject) {
     super.updateRenderObject(context, renderObject);
     renderObject
       ..isTransposed = isTransposed
@@ -3128,8 +3005,7 @@ class LoadingIndicator extends ConstrainedLayoutBuilder<BoxConstraints> {
   }
 }
 
-class RenderLoadingIndicator extends RenderProxyBox
-    with RenderConstrainedLayoutBuilder<BoxConstraints, RenderBox> {
+class RenderLoadingIndicator extends RenderProxyBox with RenderConstrainedLayoutBuilder<BoxConstraints, RenderBox> {
   bool _isDesktop = false;
   Offset _startPosition = Offset.zero;
   Offset _endPosition = Offset.zero;
@@ -3189,9 +3065,7 @@ class RenderLoadingIndicator extends RenderProxyBox
 
   void _handlePlotAreaSwipe(Velocity swipeVelocity) {
     final double minsSwipeVelocity = _isDesktop ? 0.0 : 240.0;
-    final double velocity = isTransposed
-        ? swipeVelocity.pixelsPerSecond.dy
-        : swipeVelocity.pixelsPerSecond.dx;
+    final double velocity = isTransposed ? swipeVelocity.pixelsPerSecond.dy : swipeVelocity.pixelsPerSecond.dx;
     if (velocity.abs() < minsSwipeVelocity) {
       _startPosition = Offset.zero;
       _endPosition = Offset.zero;
@@ -3218,17 +3092,12 @@ class RenderLoadingIndicator extends RenderProxyBox
     }
 
     if (isInversed) {
-      direction = direction == ChartSwipeDirection.start
-          ? ChartSwipeDirection.end
-          : ChartSwipeDirection.start;
+      direction = direction == ChartSwipeDirection.start ? ChartSwipeDirection.end : ChartSwipeDirection.start;
     }
 
-    final bool verticallyDragging =
-        (_endPosition.dy - _startPosition.dy).abs() >
-            (_endPosition.dx - _startPosition.dx).abs();
+    final bool verticallyDragging = (_endPosition.dy - _startPosition.dy).abs() > (_endPosition.dx - _startPosition.dx).abs();
 
-    if ((verticallyDragging && !isTransposed) ||
-        (!verticallyDragging && isTransposed)) {
+    if ((verticallyDragging && !isTransposed) || (!verticallyDragging && isTransposed)) {
       return;
     }
 
@@ -3238,26 +3107,22 @@ class RenderLoadingIndicator extends RenderProxyBox
     _endPosition = Offset.zero;
 
     bool buildLoadMoreIndicator = false;
-    final List<RenderChartAxis> axes =
-        (parent! as RenderBehaviorArea).cartesianAxes!.axes.values.toList();
+    final List<RenderChartAxis> axes = (parent! as RenderBehaviorArea).cartesianAxes!.axes.values.toList();
 
     for (int axisIndex = 0; axisIndex < axes.length; axisIndex++) {
       final RenderChartAxis axis = axes[axisIndex];
       final DoubleRange visibleRange = axis.visibleRange!;
       final DoubleRange actualRange = axis.actualRange!;
 
-      if (((!verticallyDragging && axis.isXAxis) ||
-              (verticallyDragging && !axis.isXAxis)) &&
-          ((actualRange.minimum.round() == visibleRange.minimum.round() &&
-                  direction == ChartSwipeDirection.start) ||
-              (actualRange.maximum.round() == visibleRange.maximum.round() &&
-                  direction == ChartSwipeDirection.end))) {
+      if (((!verticallyDragging && axis.isXAxis) || (verticallyDragging && !axis.isXAxis)) &&
+          ((actualRange.minimum.round() == visibleRange.minimum.round() && direction == ChartSwipeDirection.start) ||
+              (actualRange.maximum.round() == visibleRange.maximum.round() && direction == ChartSwipeDirection.end))) {
         buildLoadMoreIndicator = true;
         break;
       }
     }
     if (buildLoadMoreIndicator) {
-      markNeedsBuild();
+      markNeedsLayout();
     }
   }
 
@@ -3346,8 +3211,7 @@ class ChartBehavior {
 
   /// Called to customize each behaviors with given context at the given offset.
   @protected
-  void onPaint(PaintingContext context, Offset offset,
-      SfChartThemeData chartThemeData, ThemeData themeData) {}
+  void onPaint(PaintingContext context, Offset offset, SfChartThemeData chartThemeData, ThemeData themeData) {}
 }
 
 typedef SelectionCallback = void Function(int seriesIndex, int pointIndex);
@@ -3379,8 +3243,7 @@ class SelectionController {
 
   void resetSelection() {
     _hasSelectedIndexes = false;
-    selectedDataPoints
-        .forEach((int previousSelectedSeriesIndex, List<int> values) {
+    selectedDataPoints.forEach((int previousSelectedSeriesIndex, List<int> values) {
       final int length = values.length;
       for (int i = 0; i < length; i++) {
         _notifyDeselectionListeners(previousSelectedSeriesIndex, values[i]);
@@ -3399,8 +3262,7 @@ class SelectionController {
     bool forceSelection = false,
     bool forceDeselection = false,
   }) {
-    if (series is ContinuousSeriesMixin &&
-        selectionType == SelectionType.point) {
+    if (series is ContinuousSeriesMixin && selectionType == SelectionType.point) {
       return;
     }
 
@@ -3418,9 +3280,7 @@ class SelectionController {
 
     if (enableMultiSelection) {
       if (forceSelection) {
-        final bool existingSelected =
-            selectedDataPoints[seriesIndex]?.contains(segmentPointIndex) ??
-                false;
+        final bool existingSelected = selectedDataPoints[seriesIndex]?.contains(segmentPointIndex) ?? false;
         if (existingSelected) {
           return;
         }
@@ -3465,8 +3325,7 @@ class SelectionController {
           selectedPointIndex = segmentPointIndex;
         }
       } else {
-        selectedDataPoints
-            .forEach((int previousSelectedSeriesIndex, List<int> values) {
+        selectedDataPoints.forEach((int previousSelectedSeriesIndex, List<int> values) {
           if (values.isNotEmpty) {
             deselectedSeriesIndex = previousSelectedSeriesIndex;
             deselectedPointIndex = values[0];

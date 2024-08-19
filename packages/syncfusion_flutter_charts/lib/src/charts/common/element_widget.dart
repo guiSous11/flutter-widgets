@@ -71,8 +71,7 @@ class RenderChartFadeTransition extends RenderAnimatedOpacity {
   }
 }
 
-class ChartElementLayoutBuilder<T, D>
-    extends ConstrainedLayoutBuilder<BoxConstraints> {
+class ChartElementLayoutBuilder<T, D> extends ConstrainedLayoutBuilder<BoxConstraints> {
   const ChartElementLayoutBuilder({
     super.key,
     required this.state,
@@ -88,10 +87,7 @@ class ChartElementLayoutBuilder<T, D>
 }
 
 class RenderChartElementLayoutBuilder<T, D> extends RenderBox
-    with
-        RenderObjectWithChildMixin<RenderBox>,
-        RenderConstrainedLayoutBuilder<BoxConstraints, RenderBox>,
-        ChartElementParentDataMixin<T, D> {
+    with RenderObjectWithChildMixin<RenderBox>, RenderConstrainedLayoutBuilder<BoxConstraints, RenderBox>, ChartElementParentDataMixin<T, D> {
   late ChartElementParentDataMixin<T, D> state;
 
   @override
@@ -110,7 +106,7 @@ class RenderChartElementLayoutBuilder<T, D> extends RenderBox
   }
 
   void refresh() {
-    markNeedsBuild();
+    markNeedsLayout();
     (child as RenderChartFadeTransition?)?.refresh();
   }
 
@@ -143,8 +139,7 @@ class RenderChartElementLayoutBuilder<T, D> extends RenderBox
   }
 
   void handleMultiSeriesDataLabelCollisions() {
-    (child as RenderChartFadeTransition?)
-        ?.handleMultiSeriesDataLabelCollisions();
+    (child as RenderChartFadeTransition?)?.handleMultiSeriesDataLabelCollisions();
   }
 
   @override
@@ -178,16 +173,13 @@ class ChartElementStack extends MultiChildRenderObjectWidget {
   }
 
   @override
-  void updateRenderObject(
-      BuildContext context, RenderChartElementStack renderObject) {
+  void updateRenderObject(BuildContext context, RenderChartElementStack renderObject) {
     super.updateRenderObject(context, renderObject);
   }
 }
 
 class RenderChartElementStack extends RenderBox
-    with
-        ContainerRenderObjectMixin<RenderBox, ChartElementParentData>,
-        RenderBoxContainerDefaultsMixin<RenderBox, ChartElementParentData> {
+    with ContainerRenderObjectMixin<RenderBox, ChartElementParentData>, RenderBoxContainerDefaultsMixin<RenderBox, ChartElementParentData> {
   ChartMarker markerAt(int pointIndex) => ChartMarker();
 
   void refresh() {
